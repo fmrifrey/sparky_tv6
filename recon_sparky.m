@@ -1,5 +1,5 @@
 %% set parms
-fov = 14;
+fov = 10;
 N = 128;
 nd = 2;
 niter = 5;
@@ -8,16 +8,16 @@ niter = 5;
 p = dir('P*.7');
 p = toppe.utils.loadpfile(p(1).name);
 raw = permute(p,[1,5,3,2,4]);
-raw = flip(raw,1);
-load kspace.mat
+% raw = flip(raw,1);
+load ktraj.mat
 
 %% correct sizes
-if size(kspace,1) > size(raw,1)
-    warning('size(kspace,1) < size(raw,1)');
-    kspace = kspace(1:size(raw,1),:,:);
-elseif size(kspace,1) < size(raw,1)
-    warning('size(kspace,1) < size(raw,1)');
-    raw = raw(1:size(kspace,1),:,:);
+if size(ktraj,1) > size(raw,1)
+    warning('size(ktraj,1) < size(raw,1)');
+    ktraj = ktraj(1:size(raw,1),:,:);
+elseif size(ktraj,1) < size(raw,1)
+    warning('size(ktraj,1) < size(raw,1)');
+    raw = raw(1:size(ktraj,1),:,:);
 end
 
 %% compress coils
@@ -36,7 +36,7 @@ nufft_args = {N*ones(1,nd), ...
     'minmax:kb'};
     
 %% form NUFFT operator
-omega = 2*pi*fov/N.*reshape(kspace(:,:,1:nd),[],nd);
+omega = 2*pi*fov/N.*reshape(ktraj(:,:,1:nd),[],nd);
 omega_msk = vecnorm(omega,2,2) < pi;
 omega = omega(omega_msk,:);
 A = Gnufft(true(N*ones(1,nd)),[omega,nufft_args]); % NUFFT
@@ -51,10 +51,10 @@ b = b(omega_msk,:);
 x0 = A' * (w.*b);
 x0 = ir_wls_init_scale(A, b, x0);
 
-imagesc(abs(x))
+imagesc(reshape(abs(x0),N*ones(1,nd)));
 
 %% solve with CG
-x = cg_solve(x0, A, b, niter);
+x = rec.cg_solve(x0, A, b, niter);
 x = reshape(x,N*ones(1,nd));
 
 imagesc(abs(x));

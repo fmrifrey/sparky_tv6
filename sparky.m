@@ -23,7 +23,7 @@ end
 defaults.te = 'min'; % echo time (center of excitation --> beginning of readout) (ms)
 defaults.tr = 'min'; % repitition time (ms)
 
-defaults.slabthk = 2; % slice thickness (cm)
+defaults.slabthk = 3; % slice thickness (cm)
 
 defaults.rffa = 10; % tipdown flip angle (deg)
 defaults.rftbw = 8; % tipdown time-bandwidth product

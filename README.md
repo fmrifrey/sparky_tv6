@@ -1,6 +1,6 @@
 # SPARKY
 SPGR pulse sequence for ARbitrary Kspace trajectories
-![download](https://github.com/user-attachments/assets/97bd96f6-cddf-4a43-a21b-52191e121b4c)
+![download_resize](https://github.com/user-attachments/assets/5b9542cb-a6f4-4d07-ab24-7eb8b6e7cddf)
 
 1. After externally generating the desired kspace trajectory, use sparky() function to generate the toppe sequence.
 The kspace trajectory does not need to include ramps or pre/rewinders, but it does need to be pre-constrained for slew

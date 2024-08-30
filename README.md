@@ -1,4 +1,4 @@
-![download_resize](https://github.com/user-attachments/assets/5b9542cb-a6f4-4d07-ab24-7eb8b6e7cddf)
+![download_resize](https://github.com/user-attachments/assets/e3c4a105-a13f-4d95-8cba-1ef84b7d1ff0)
 # SPARKY
 SPGR pulse sequence for ARbitrary Kspace trajectories
 
